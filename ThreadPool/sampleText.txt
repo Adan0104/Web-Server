@@ -1,0 +1,2 @@
+This is a sample text file for reading and returning to the client.
+Hallo meine lieben Freunde!

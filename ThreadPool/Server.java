@@ -1,5 +1,7 @@
 package ThreadPool;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
@@ -16,8 +18,14 @@ public class Server {
     }
 
     public void handleClient(Socket clientSocket){
-        try(PrintWriter toSocket = new PrintWriter(clientSocket.getOutputStream(),true)){
-            toSocket.println("Hello from server " + clientSocket.getRemoteSocketAddress());
+        try(PrintWriter toSocket = new PrintWriter(clientSocket.getOutputStream(),true);
+            BufferedReader textFile = new BufferedReader(new FileReader("D:\\VSCode\\Java\\Web-Server\\ThreadPool\\sampleText.txt"))
+        ){
+            String line = textFile.readLine();
+            while(line != null){
+                toSocket.println(line);
+                line = textFile.readLine();
+            }
         }
         catch(IOException ex){
             ex.printStackTrace();
